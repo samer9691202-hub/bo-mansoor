@@ -172,7 +172,14 @@ function printInvoice(id){
  const pdfEnglish=isEnglish();
  const pdfLabels=pdfEnglish?{date:'Invoice Date',number:'Invoice No.: ',customer:'Mr. / ',intro:'Invoice for the following works:',heads:['','Description','Qty','Price','Total'],total:'Invoice Total',paid:'Paid',balance:'Balance Due',currency:'All amounts in Qatari Riyals',note:'Notes: ',validity:''}:{date:'تاريخ الفاتورة',number:'رقم الفاتورة: ',customer:'السيد / ',intro:'فاتورة عن الأعمال التالية:',heads:['','البيان','العدد','السعر','الإجمالي'],total:'إجمالي الفاتورة',paid:'المدفوع',balance:'المتبقي',currency:'جميع المبالغ بالريال القطري',note:'ملاحظات: ',validity:''};
  const labelsJSON=JSON.stringify(pdfLabels);
- const totalHTML=JSON.stringify(`<tr class="invoice-summary"><td colspan="5" style="padding:2.5mm 3mm 1mm;border:0;border-top:.5mm solid #777;background:#fff;color:#111;font-family:Tahoma,Arial,sans-serif;font-size:9pt;font-weight:700;direction:${pdfEnglish?'ltr':'rtl'}"><div style="text-align:${pdfEnglish?'right':'left'};direction:${pdfEnglish?'ltr':'rtl'};padding:1.2mm 0;font-family:inherit;font-size:9pt;font-weight:700;white-space:nowrap">${pdfLabels.total}: ${quoteNumber(q.total)||'0'}</div><div style="text-align:${pdfEnglish?'right':'left'};direction:${pdfEnglish?'ltr':'rtl'};padding:1.2mm 0;border-top:.2mm solid #ddd;font-family:inherit;font-size:9pt;font-weight:700;white-space:nowrap">${pdfLabels.paid}: ${quoteNumber(q.paid||0)}</div><div style="text-align:${pdfEnglish?'right':'left'};direction:${pdfEnglish?'ltr':'rtl'};padding:1.2mm 0;border-top:.2mm solid #ddd;font-family:inherit;font-size:9pt;font-weight:700;white-space:nowrap">${pdfLabels.balance}: ${quoteNumber(Math.max(0,(+q.total||0)-(+q.paid||0)))}</div><div style="padding-top:1mm;font-size:7.5pt;color:#555;font-weight:400">${pdfLabels.currency}</div></td></tr>`);
+ const summaryDirection=pdfEnglish?'ltr':'rtl';
+ const summaryRows=[
+  [pdfLabels.total,quoteNumber(q.total)||'0'],
+  ...(Number(q.discount||0)>0?[[pdfEnglish?'Discount':'الخصم',quoteNumber(q.discount)]]:[]),
+  [pdfLabels.paid,quoteNumber(q.paid||0)],
+  [pdfLabels.balance,quoteNumber(Math.max(0,(+q.total||0)-(+q.paid||0)))]
+ ];
+ const totalHTML=JSON.stringify(`<tr class="invoice-summary"><td colspan="5" style="padding:1mm 3mm 1mm;border:0;border-top:.5mm solid #777;background:#fff;color:#111;font-family:Tahoma,Arial,sans-serif;font-size:9pt;font-weight:700;direction:${summaryDirection}">${summaryRows.map(([label,amount])=>`<div style="display:flex;justify-content:space-between;align-items:center;direction:${summaryDirection};padding:1.8mm 1mm;border-bottom:.35mm solid #777;font-family:inherit;font-size:9pt;font-weight:700;line-height:1.35;white-space:nowrap"><span>${label}:</span><span>${amount}</span></div>`).join('')}<div style="padding-top:1.2mm;text-align:center;font-size:7.5pt;color:#555;font-weight:400">${pdfLabels.currency}</div></td></tr>`);
  const PAGE_TABLE_BUDGET=108;
  const paginationScript=`
  const rows=${rowMarkupJSON}, header=${headerJSON}, footer=${footerJSON}, dateText=${dateJSON}, code=${codeJSON}, customer=${customerJSON}, note=${noteJSON}, totalRow=${totalHTML}, L=${labelsJSON};
