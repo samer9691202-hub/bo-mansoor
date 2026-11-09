@@ -444,3 +444,40 @@ body[data-page="dashboard"] .app-shell .page-head .btn{background:#f3dce6;color:
  .app-shell .document-result-count{align-self:center}
  .app-shell .document-list-table{min-width:780px}
 }
+
+/* Settings upgrade — application UI only; print/PDF document templates remain untouched. */
+.app-shell{font-size:calc(1em * var(--app-font-scale,1))}
+.app-shell .settings-section-title{display:flex;align-items:center;gap:12px;margin:24px 0 12px;padding:0 2px}
+.app-shell .settings-section-title>span{display:grid;place-items:center;width:42px;height:42px;flex:0 0 42px;border-radius:13px;background:#f7eaf0;color:#70163c;font-size:19px}
+.app-shell .settings-section-title h2{margin:0;color:#542139;font-size:15px}
+.app-shell .settings-section-title p{margin:4px 0 0;color:#927b86;font-size:11px}
+.app-shell .settings-backup-status{margin:12px 0;padding:11px 13px;border:1px solid #eadde3;border-radius:10px;background:#fcf7f9;color:#70163c;font-size:11px;font-weight:800}
+.app-shell .settings-hint{margin:10px 0 0;font-size:10px;color:#927b86}
+.app-shell .settings-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-bottom:15px}
+.app-shell .settings-metric{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 13px;border:1px solid #eadde3;border-radius:11px;background:#fdf9fb;color:#795a6a;font-size:11px}
+.app-shell .settings-metric strong{color:#70163c;font-size:16px}
+.app-shell .settings-warning{margin:10px 0 15px;padding:11px 13px;border:1px solid #d9eee2;border-radius:10px;background:#f2faf5;color:#28724f;font-size:11px;font-weight:700}
+.app-shell .settings-warning.is-warning{border-color:#f1d8c7;background:#fff6ef;color:#a44d26}
+.app-shell .settings-export-actions{display:flex;flex-wrap:wrap;gap:8px}
+.app-shell .settings-export-actions .btn{min-height:37px}
+@media screen and (max-width:760px){
+ .app-shell .settings-metrics{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+ .app-shell .settings-metric{padding:10px;font-size:10px}
+ .app-shell .settings-section-title{margin-top:20px}
+ .app-shell .settings-export-actions .btn{flex:1 1 calc(50% - 8px)}
+}
+@media screen{
+ body.theme-dark{background:#111923;color:#e7edf3}
+ body.theme-dark .app-shell .main,body.theme-dark .app-shell .content{background:#111923;color:#e7edf3}
+ body.theme-dark .app-shell .topbar,body.theme-dark .app-shell .panel,body.theme-dark .app-shell .settings-card,body.theme-dark .app-shell .stat-card,body.theme-dark .app-shell .quick-tile,body.theme-dark .app-shell .document-list-panel{background:#1b2633!important;border-color:#344252!important;color:#e7edf3}
+ body.theme-dark .app-shell .page-head h1,body.theme-dark .app-shell .panel-head h3,body.theme-dark .app-shell .settings-section-title h2,body.theme-dark .app-shell .settings-card h3,body.theme-dark .app-shell .stat-value,body.theme-dark .app-shell .quick-tile b{color:#f0f4f8!important}
+ body.theme-dark .app-shell .page-head p,body.theme-dark .app-shell .settings-card p,body.theme-dark .app-shell .settings-section-title p,body.theme-dark .app-shell label,body.theme-dark .app-shell .stat-top{color:#aebdca!important}
+ body.theme-dark .app-shell .field,body.theme-dark .app-shell select,body.theme-dark .app-shell textarea{background:#121c27!important;border-color:#405064!important;color:#eef3f8!important}
+ body.theme-dark .app-shell th{background:#253344!important;color:#d1dce7!important;border-color:#344252!important}
+ body.theme-dark .app-shell td{color:#dce5ed!important;border-color:#344252!important}
+ body.theme-dark .app-shell tbody tr:hover{background:#243242!important}
+ body.theme-dark .app-shell .settings-metric,body.theme-dark .app-shell .settings-backup-status{background:#202d3b;border-color:#3b4b5d;color:#e3ebf3}
+ body.theme-dark .app-shell .settings-metric strong{color:#e9a9c1}
+ body.theme-dark .app-shell .settings-section-title>span{background:#382536;color:#f0b6cf}
+ body.theme-dark .app-shell .notice{background:#302a35;border-color:#554252;color:#e8cbd8}
+}
