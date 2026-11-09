@@ -529,3 +529,29 @@ body.theme-dark .section-toggle{background:#202d3b;border-color:#3b4b5d;color:#e
 .recovery-unlock-form{margin-top:13px;padding:13px;border-radius:13px;background:#f8f5f7;border:1px solid #eadfe5;text-align:right}.recovery-unlock-form .pin-modal-input{font-size:15px;letter-spacing:1px}
 body.theme-dark .pin-settings-card{background:#202c39;border-color:#3b4a5a}body.theme-dark .pin-settings-copy strong{color:#f1dce6}body.theme-dark .pin-settings-copy span{color:#aeb9c5}body.theme-dark .pin-status-pill{background:#354252;color:#d5dee7}body.theme-dark .pin-status-pill.is-on{background:#1f4936;color:#9be0b7}body.theme-dark .recovery-info{background:#3d3424;border-color:#64512c;color:#f0ce86}body.theme-dark .recovery-info small{color:#d3bd8e}body.theme-dark .recovery-info.is-ready{background:#203c30;border-color:#315d46;color:#9be0b7}body.theme-dark .recovery-info.is-ready small{color:#b4d6c1}
 @media(max-width:520px){.pin-setup-card{padding:27px 18px 19px;border-radius:18px}.pin-settings-card{align-items:flex-start;flex-wrap:wrap}.pin-status-pill{margin-right:62px}.pin-action-row{display:grid;grid-template-columns:1fr}.pin-action-row .btn{width:100%}.recovery-code-value{font-size:16px;letter-spacing:0}}
+
+/* Premium PIN and recovery setup cards */
+.pin-premium-card{width:min(460px,100%);padding:30px 28px 24px;border:1px solid #eadde4;background:radial-gradient(circle at 50% -12%,#f8edf2 0,#fff 42%);}
+.pin-card-orb{width:68px;height:68px;margin:0 auto 13px;display:grid;place-items:center;border-radius:22px;background:linear-gradient(145deg,#6d304d,#3f1c31);color:#fff;font-size:30px;box-shadow:0 9px 22px rgba(84,33,57,.22);}
+.pin-card-orb.recovery-orb{background:linear-gradient(145deg,#b68a48,#785324);box-shadow:0 9px 22px rgba(145,104,43,.2)}
+.pin-premium-card .pin-setup-kicker{font-size:11px;letter-spacing:1px;color:#94627b}
+.pin-premium-card h2{font-size:23px;margin-bottom:9px}
+.pin-premium-card>p{max-width:350px;margin:0 auto 20px;font-size:13px}
+.pin-card-fields{display:grid;gap:14px;text-align:right}
+.pin-field-group label{display:block;margin:0 0 7px;color:#4e3542;font-size:12px;font-weight:900}
+.pin-input-wrap{position:relative;display:flex;align-items:center;gap:9px;padding:0 12px;border:1px solid #e1d5dc;border-radius:13px;background:#fff;transition:border-color .18s,box-shadow .18s}
+.pin-input-wrap:focus-within{border-color:#94516f;box-shadow:0 0 0 3px rgba(148,81,111,.1)}
+.pin-input-wrap>span{color:#9a7185;font-size:16px;flex:0 0 auto}
+.pin-input-wrap .pin-modal-input{min-width:0;flex:1;border:0!important;box-shadow:none!important;background:transparent;min-height:49px;text-align:right;direction:rtl;letter-spacing:1px;font-size:15px;padding:0}
+.pin-input-wrap .pin-modal-input:focus{outline:0}
+.pin-eye{flex:0 0 34px;width:34px;height:34px;border:0;border-radius:9px;background:#f5eef2;color:#80536a;font-size:17px;cursor:pointer}
+.pin-eye.is-visible{background:#e9dce4;color:#542139}
+.pin-field-group>small{display:block;margin:6px 3px 0;color:#92909a;font-size:10px}
+.pin-security-note{display:flex;align-items:center;gap:10px;margin-top:16px;padding:12px 13px;border:1px solid #e8dce3;border-radius:12px;background:#f9f5f7;text-align:right;color:#6f5362;font-size:11px;line-height:1.8}
+.pin-security-note>b{font-size:18px;color:#80506a;flex:0 0 auto}
+.pin-security-note.recovery-note{background:#fff9ee;border-color:#f0e2c7;color:#806331}
+.pin-security-note.recovery-note>b{color:#a7792e}
+.pin-premium-card .pin-modal-submit{min-height:50px;margin-top:12px;font-size:14px;box-shadow:0 7px 16px rgba(84,33,57,.16)}
+body.theme-dark .pin-premium-card{background:radial-gradient(circle at 50% -12%,#3a2c37 0,#202833 45%);border-color:#45505d}
+body.theme-dark .pin-field-group label{color:#f0dce6}body.theme-dark .pin-input-wrap{background:#202a35;border-color:#4b5967}body.theme-dark .pin-input-wrap .pin-modal-input{color:#f1f3f5}body.theme-dark .pin-eye{background:#394653;color:#e5cbd8}body.theme-dark .pin-security-note{background:#303b47;border-color:#495664;color:#d4c7ce}
+@media(max-width:520px){.pin-premium-card{padding:27px 18px 20px}.pin-card-orb{width:60px;height:60px;border-radius:19px}.pin-premium-card h2{font-size:20px}.pin-input-wrap .pin-modal-input{font-size:14px}}
