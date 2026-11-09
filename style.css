@@ -555,3 +555,19 @@ body.theme-dark .pin-settings-card{background:#202c39;border-color:#3b4a5a}body.
 body.theme-dark .pin-premium-card{background:radial-gradient(circle at 50% -12%,#3a2c37 0,#202833 45%);border-color:#45505d}
 body.theme-dark .pin-field-group label{color:#f0dce6}body.theme-dark .pin-input-wrap{background:#202a35;border-color:#4b5967}body.theme-dark .pin-input-wrap .pin-modal-input{color:#f1f3f5}body.theme-dark .pin-eye{background:#394653;color:#e5cbd8}body.theme-dark .pin-security-note{background:#303b47;border-color:#495664;color:#d4c7ce}
 @media(max-width:520px){.pin-premium-card{padding:27px 18px 20px}.pin-card-orb{width:60px;height:60px;border-radius:19px}.pin-premium-card h2{font-size:20px}.pin-input-wrap .pin-modal-input{font-size:14px}}
+
+/* Unified in-app dialog cards: replace browser-native prompt/confirm surfaces. */
+.app-dialog-overlay{position:fixed;inset:0;z-index:10050;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(18,20,28,.58);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);animation:appDialogFade .16s ease-out}
+.app-dialog-card{width:min(100%,430px);padding:27px 25px 22px;border:1px solid rgba(255,255,255,.7);border-radius:24px;background:var(--card,#fff);color:var(--text,#29232a);box-shadow:0 24px 70px rgba(0,0,0,.24);text-align:center;animation:appDialogPop .2s ease-out}
+.app-dialog-icon{width:54px;height:54px;margin:0 auto 14px;display:grid;place-items:center;border-radius:18px;background:rgba(128,34,65,.10);color:#812344;font-size:25px;font-weight:800}
+.app-dialog-icon.is-danger{background:rgba(190,54,54,.11);color:#bd3838}
+.app-dialog-card h3{margin:0 0 9px;font-size:20px;font-weight:800}
+.app-dialog-card p{margin:0 auto 18px;max-width:340px;color:var(--muted,#77717a);font-size:14px;line-height:1.8;white-space:pre-line}
+.app-dialog-input{width:100%;min-height:48px;margin:0 0 18px;text-align:right;border-radius:13px!important}
+.app-dialog-actions{display:flex;gap:10px;justify-content:center;margin-top:8px}
+.app-dialog-actions .btn{min-width:112px;min-height:44px;border-radius:13px;font-weight:750}
+.app-dialog-cancel{background:var(--surface,#f3f1f3);color:var(--text,#393239);border:1px solid var(--border,#e7e2e6)}
+.app-dialog-ok.btn-danger{background:#b73543;color:#fff;border-color:#b73543}
+@keyframes appDialogFade{from{opacity:0}to{opacity:1}}
+@keyframes appDialogPop{from{opacity:0;transform:translateY(10px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media(max-width:480px){.app-dialog-card{padding:23px 18px 18px;border-radius:21px}.app-dialog-actions .btn{flex:1;min-width:0}}
