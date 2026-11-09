@@ -503,3 +503,29 @@ body.theme-dark.list-cards #content table tbody td{border-color:#344252}
 body.theme-dark .section-toggle{background:#202d3b;border-color:#3b4b5d;color:#e3ebf3}
 @media(max-width:700px){.section-toggle-grid{grid-template-columns:1fr}body.list-cards #content table tbody{grid-template-columns:1fr}}
 @media print{body.list-cards #content table{display:table!important}body.list-cards #content table thead{display:table-header-group!important}body.list-cards #content table tbody{display:table-row-group!important}body.list-cards #content table tbody tr{display:table-row!important;box-shadow:none!important;border:0!important}body.list-cards #content table tbody td{display:table-cell!important}body.list-cards #content table tbody td:before{content:none!important}}
+
+/* Refined optional PIN and recovery experience */
+.pin-settings-card{display:flex;align-items:center;gap:14px;padding:17px;border:1px solid #e8dce2;border-radius:16px;background:linear-gradient(135deg,#fff 0%,#fbf6f8 100%);margin:8px 0 16px}
+.pin-settings-badge{width:48px;height:48px;flex:0 0 48px;border-radius:14px;display:grid;place-items:center;background:#f3e8ed;font-size:23px}
+.pin-settings-copy{display:flex;flex-direction:column;gap:5px;min-width:0;flex:1}.pin-settings-copy strong{font-size:14px;color:#542139}.pin-settings-copy span{font-size:12px;color:#75818d;line-height:1.7}
+.pin-status-pill{padding:6px 11px;border-radius:30px;background:#f1f2f4;color:#687482;font-size:11px;font-weight:800;white-space:nowrap}.pin-status-pill.is-on{background:#e4f5eb;color:#19804b}
+.pin-action-row{display:flex;flex-wrap:wrap;gap:9px}.pin-action-row .btn{margin:0}
+.recovery-info{display:flex;align-items:flex-start;gap:11px;padding:13px 15px;border-radius:13px;background:#fff8e9;border:1px solid #f3e2b8;margin-top:15px;color:#76551b}.recovery-info>span{font-size:19px;font-weight:900}.recovery-info div{display:flex;flex-direction:column;gap:4px}.recovery-info strong{font-size:12px}.recovery-info small{font-size:11px;line-height:1.7;color:#8a754c}.recovery-info.is-ready{background:#edf8f1;border-color:#ccebd7;color:#237b49}.recovery-info.is-ready small{color:#557b63}
+.pin-setup-card{position:relative;width:min(430px,100%);max-height:calc(100vh - 36px);overflow:auto;padding:30px 25px 23px;border-radius:22px;background:#fff;text-align:right;direction:rtl;box-shadow:0 28px 90px rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.6);animation:pinCardIn .22s ease-out}
+@keyframes pinCardIn{from{opacity:0;transform:translateY(12px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
+.pin-modal-close{position:absolute;left:14px;top:12px;width:34px;height:34px;border:0;border-radius:10px;background:#f2f3f5;color:#64717e;font-size:23px;cursor:pointer}
+.pin-setup-icon{width:62px;height:62px;border-radius:19px;display:grid;place-items:center;margin:0 auto 14px;background:#f4eaf0;font-size:29px}
+.pin-setup-kicker{text-align:center;color:#8a536e;font-size:10px;font-weight:900;letter-spacing:.5px;margin-bottom:7px}
+.pin-setup-card h2{text-align:center;margin:0 0 8px;color:#542139;font-size:21px}.pin-setup-card>p{text-align:center;margin:0 0 22px;color:#788492;font-size:12px;line-height:1.8}
+.pin-setup-card>label,.recovery-unlock-form label{display:block;margin:12px 0 7px;color:#536171;font-size:12px;font-weight:800}
+.pin-modal-input{width:100%;min-height:48px;border-radius:12px;text-align:center;letter-spacing:3px;font-size:18px;direction:ltr;border:1px solid #dfe4e9;background:#fbfcfd}
+.pin-modal-submit{width:100%;min-height:47px;margin-top:17px;border-radius:12px;font-weight:800}
+.pin-modal-error{display:block;min-height:18px;margin-top:8px;text-align:center;color:#c0394b;font-size:11px}
+.pin-modal-foot{text-align:center;margin-top:13px;color:#929ca7;font-size:10px}
+.recovery-code-card{text-align:center}.recovery-icon{background:#f8f0df}.recovery-code-value{margin:20px 0;padding:17px 10px;border-radius:14px;border:1px dashed #b98d54;background:#fff9ed;color:#573c19;font-family:monospace;font-size:clamp(17px,5vw,22px);font-weight:900;letter-spacing:1px;white-space:nowrap}
+.recovery-warning{padding:11px 13px;border-radius:11px;background:#fff5e5;color:#8a5c1e;font-size:11px;line-height:1.8;text-align:right}
+.pin-unlock-card{width:min(390px,100%);text-align:center}.pin-unlock-card>p{margin-bottom:18px}.pin-unlock-card .pin-modal-input{margin-bottom:2px}
+.pin-text-link{display:block;margin:15px auto 0;padding:7px 10px;border:0;background:transparent;color:#80506a;font-size:12px;font-weight:800;text-decoration:underline;cursor:pointer}
+.recovery-unlock-form{margin-top:13px;padding:13px;border-radius:13px;background:#f8f5f7;border:1px solid #eadfe5;text-align:right}.recovery-unlock-form .pin-modal-input{font-size:15px;letter-spacing:1px}
+body.theme-dark .pin-settings-card{background:#202c39;border-color:#3b4a5a}body.theme-dark .pin-settings-copy strong{color:#f1dce6}body.theme-dark .pin-settings-copy span{color:#aeb9c5}body.theme-dark .pin-status-pill{background:#354252;color:#d5dee7}body.theme-dark .pin-status-pill.is-on{background:#1f4936;color:#9be0b7}body.theme-dark .recovery-info{background:#3d3424;border-color:#64512c;color:#f0ce86}body.theme-dark .recovery-info small{color:#d3bd8e}body.theme-dark .recovery-info.is-ready{background:#203c30;border-color:#315d46;color:#9be0b7}body.theme-dark .recovery-info.is-ready small{color:#b4d6c1}
+@media(max-width:520px){.pin-setup-card{padding:27px 18px 19px;border-radius:18px}.pin-settings-card{align-items:flex-start;flex-wrap:wrap}.pin-status-pill{margin-right:62px}.pin-action-row{display:grid;grid-template-columns:1fr}.pin-action-row .btn{width:100%}.recovery-code-value{font-size:16px;letter-spacing:0}}
