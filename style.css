@@ -294,3 +294,153 @@ body[data-page="dashboard"] .app-shell .page-head:after{background:radial-gradie
  .app-shell .panel-head{padding:13px 14px}
 }
 @media(prefers-reduced-motion:reduce){.app-shell *, .modal-backdrop *{transition:none!important;scroll-behavior:auto!important}}
+
+/* V19 — Burgundy identity matched to the workshop invoice header.
+   UI-only overrides: invoice/quotation document markup, PDF and A4 print templates remain unchanged. */
+.app-shell{
+  --bg:#f8f3f5;--panel:#ffffff;--ink:#321522;--muted:#88727c;--line:#eadde3;
+  --nav:#3b1025;--nav2:#51152f;--accent:#70163c;--accent-dark:#56102d;
+  --shadow:0 10px 28px rgba(75,20,47,.075);
+}
+body[data-page]{background:radial-gradient(ellipse at 86% 0%,#f1e3e9 0,transparent 38%),#f8f4f6;color:#321522}
+.app-shell .sidebar{
+  background:linear-gradient(165deg,#3b1025 0%,#51152f 58%,#310c1e 100%);
+  border-left:1px solid rgba(255,255,255,.07);box-shadow:8px 0 30px rgba(59,16,37,.13)
+}
+.app-shell .brand{border-bottom-color:rgba(255,255,255,.13)}
+.app-shell .brand-mark{
+  background:linear-gradient(145deg,#9a4568 0%,#70163c 55%,#4d102b 100%);
+  color:#fff;box-shadow:0 8px 20px rgba(30,5,18,.25);border:1px solid rgba(255,255,255,.22)
+}
+.app-shell .side-label{color:#c7a9b7}
+.app-shell .nav-item{color:#e0cbd4}
+.app-shell .nav-item span{color:#d1aebd;background:rgba(255,255,255,.055)}
+.app-shell .nav-item:hover{background:rgba(255,255,255,.10);color:#fff}
+.app-shell .nav-item.active{
+  background:linear-gradient(100deg,rgba(255,255,255,.17),rgba(255,255,255,.055));
+  color:#fff;border-right:3px solid #e5b8ca;box-shadow:inset 0 0 0 1px rgba(255,255,255,.10)
+}
+.app-shell .nav-item.active span{color:#fff;background:rgba(255,255,255,.13)}
+.app-shell .sidebar-bottom{border-top-color:rgba(255,255,255,.13);color:#c7a9b7}
+.app-shell .topbar{border-bottom-color:#eadde3;box-shadow:0 4px 18px rgba(75,20,47,.04)}
+.app-shell .crumb{color:#987e89}.app-shell .crumb strong{color:#4b1b31}
+.app-shell .offline-pill{background:#f5eaf0;border-color:#ead2dd;color:#75445b}
+.app-shell .btn-primary{
+  background:linear-gradient(135deg,#873052,#70163c);border-color:#70163c;color:#fff;
+  box-shadow:0 5px 14px rgba(112,22,60,.18)
+}
+.app-shell .btn-primary:hover{background:linear-gradient(135deg,#96385d,#5f1233);box-shadow:0 8px 18px rgba(112,22,60,.23)}
+.app-shell .btn-light{border-color:#eadde3;color:#593044}
+.app-shell .btn-light:hover{background:#fbf4f7;border-color:#d9b9c8}
+.app-shell .btn-danger{background:#fff4f4;border-color:#f2d9dc;color:#b84d58}
+.app-shell .page-head h1{color:#4b1b31}
+.app-shell .page-head p{color:#8b737e}
+body[data-page="dashboard"] .app-shell .page-head{
+  background:linear-gradient(112deg,#421027 0%,#70163c 58%,#91395d 100%);
+  box-shadow:0 14px 32px rgba(75,20,47,.18)
+}
+body[data-page="dashboard"] .app-shell .page-head:after{background:radial-gradient(circle,rgba(255,224,237,.18),transparent 70%)}
+body[data-page="dashboard"] .app-shell .page-head .btn{background:#f3dce6;color:#51152f;border-color:rgba(255,255,255,.25)}
+.app-shell .stat-card,.app-shell .panel,.app-shell .settings-card,.app-shell .quote-summary-card{
+  border-color:#eadde3;box-shadow:0 8px 24px rgba(75,20,47,.055)
+}
+.app-shell .stat-card:after{background:linear-gradient(90deg,#70163c,rgba(112,22,60,.10))}
+.app-shell .stat-card:nth-child(2):after{background:linear-gradient(90deg,#9b6680,rgba(155,102,128,.10))}
+.app-shell .stat-card:nth-child(3):after{background:linear-gradient(90deg,#29966f,rgba(41,150,111,.10))}
+.app-shell .stat-card:nth-child(4):after{background:linear-gradient(90deg,#cf6b6b,rgba(207,107,107,.10))}
+.app-shell .stat-icon{background:#f6e9ef;color:#70163c}
+.app-shell .stat-card:nth-child(2) .stat-icon{background:#f2eaf0;color:#87516b}
+.app-shell .stat-card:nth-child(3) .stat-icon{background:#e9f7f0;color:#26966d}
+.app-shell .stat-card:nth-child(4) .stat-icon{background:#fff0ed;color:#c76b5c}
+.app-shell .stat-value{color:#4b1b31}
+.app-shell .panel-head{background:linear-gradient(180deg,#fff,#fdf9fb);border-bottom-color:#f0e6eb}
+.app-shell .panel-head h3{color:#54253b}
+.app-shell .quick-tile{border-color:#eadde3;background:linear-gradient(145deg,#fff,#fdf8fa)}
+.app-shell .quick-tile:hover{border-color:#d8b4c3;box-shadow:0 10px 22px rgba(112,22,60,.09)}
+.app-shell .quick-tile span{background:#f6e9ef;color:#70163c}
+.app-shell .quick-tile b{color:#54253b}
+.app-shell th{background:#f8eff3;color:#806271}
+.app-shell td{border-top-color:#f0e6eb}
+.app-shell tbody tr:hover{background:#fdf7fa}
+.app-shell .primary-cell{color:#54253b}
+.app-shell .field,.app-shell select,.app-shell textarea{border-color:#e7d8df;color:#54253b}
+.app-shell .field:focus,.app-shell select:focus,.app-shell textarea:focus{border-color:#a65a79;box-shadow:0 0 0 3px rgba(112,22,60,.12)}
+.app-shell label{color:#765364}
+.app-shell .notice{background:#fbf2f6;border-color:#ebd5df;color:#75445b}
+.app-shell .progress{background:#f1e5eb}.app-shell .progress span{background:linear-gradient(90deg,#9b4568,#70163c)}
+.app-shell .detail-box{background:#fbf5f8;border-color:#eee1e7}
+.app-shell .modal-backdrop .modal{border-color:#eadde3}
+.app-shell .modal-backdrop .modal-head{background:#fcf7f9}
+.app-shell .modal-backdrop .modal-close{background:#f5eaf0;color:#633047}
+.app-shell .toast{background:#421027}
+.app-shell footer{border-top-color:#eadde3;color:#927b86}
+.app-shell .mobile-menu{border-color:#e7d8df;color:#633047}
+.app-shell :focus-visible{outline:3px solid rgba(112,22,60,.28);outline-offset:2px}
+@media(max-width:760px){
+  .app-shell .sidebar{box-shadow:0 0 0 100vw rgba(59,16,37,.42)}
+  .app-shell .stat-card{box-shadow:0 5px 16px rgba(75,20,47,.05)}
+}
+
+/* V20 — Quote and invoice management screens only.
+   These rules do not target document preview, invoice/quote HTML templates or A4 print/PDF styles. */
+.app-shell .document-management-page{--doc-accent:#70163c;--doc-soft:#f8edf2;--doc-border:#eadde3}
+.app-shell .document-management-page .page-head{margin-bottom:18px}
+.app-shell .document-management-page .page-head h1{color:#4b1b31}
+.app-shell .document-kpi-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin:0 0 18px}
+.app-shell .document-management-page .quote-summary-card{position:relative;overflow:hidden;min-height:112px;padding:17px 18px;border:1px solid var(--doc-border);border-radius:14px;background:linear-gradient(145deg,#fff 0%,#fdf8fa 100%);box-shadow:0 7px 20px rgba(75,20,47,.045)}
+.app-shell .document-management-page .quote-summary-card:before{content:"";position:absolute;right:0;top:0;bottom:0;width:4px;background:linear-gradient(180deg,#873052,#70163c)}
+.app-shell .document-management-page .quote-summary-card span{font-size:11px;color:#856b78;font-weight:700}
+.app-shell .document-management-page .quote-summary-card strong{display:block;margin-top:7px;font-size:22px;line-height:1.35;color:#581832;overflow-wrap:anywhere}
+.app-shell .document-management-page .quote-summary-card small{display:block;margin-top:4px;font-size:10px;color:#a18d96}
+.app-shell .document-list-panel{overflow:hidden;border:1px solid #eadde3;border-radius:15px;box-shadow:0 8px 24px rgba(75,20,47,.05)}
+.app-shell .document-list-panel>.panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:17px 19px;background:linear-gradient(110deg,#fff 0%,#fcf5f8 100%)}
+.app-shell .document-list-panel>.panel-head h3{margin:0;color:#542139;font-size:14px}
+.app-shell .document-list-panel>.panel-head p{margin:5px 0 0;color:#967f8a;font-size:10px}
+.app-shell .document-count-pill{flex:none;padding:7px 11px;border:1px solid #ead4de;border-radius:999px;background:#f8edf2;color:#70163c;font-size:10px;font-weight:800}
+.app-shell .document-toolbar{display:flex;align-items:center;gap:10px;margin:0 0 14px;flex-wrap:wrap}
+.app-shell .invoice-search-wrap{position:relative;flex:1;min-width:230px}
+.app-shell .invoice-search-wrap>span{position:absolute;right:13px;top:7px;color:#987b89;font-size:22px;pointer-events:none}
+.app-shell .invoice-search-wrap input{padding-right:42px}
+.app-shell .document-toolbar select{width:auto;min-width:160px}
+.app-shell .document-result-count{white-space:nowrap;color:#8e7783;font-size:11px;font-weight:700}
+.app-shell .document-list-table{width:100%;border-collapse:separate;border-spacing:0;min-width:780px}
+.app-shell .document-list-table th{padding:13px 12px;background:#f8eff3;color:#785466;font-size:10px;font-weight:800;white-space:nowrap;border-bottom:1px solid #eadde3}
+.app-shell .document-list-table td{padding:12px;vertical-align:middle;border-top:1px solid #f1e8ed;font-size:11px}
+.app-shell .document-list-table tbody tr:first-child td{border-top:0}
+.app-shell .document-list-table tbody tr{transition:background .15s}
+.app-shell .document-list-table tbody tr:hover{background:#fdf7fa}
+.app-shell .document-list-table .primary-cell{font-size:12px;font-weight:800;color:#542139}
+.app-shell .document-list-table .sub-cell{display:block;margin-top:3px;color:#a18d96;font-size:10px}
+.app-shell .document-list-table .quote-code,.app-shell .document-list-table .invoice-code{color:#70163c;font-weight:900;letter-spacing:.15px}
+.app-shell .document-list-table .quote-amount,.app-shell .document-list-table .invoice-amount{font-weight:900;color:#542139;white-space:nowrap}
+.app-shell .document-list-table .invoice-due{font-weight:800;color:#7d6471;white-space:nowrap}
+.app-shell .document-list-table .invoice-due.is-due{color:#b14b5b}
+.app-shell .invoice-row-actions{display:flex;align-items:center;gap:5px;white-space:nowrap}
+.app-shell .invoice-row-actions .btn,.app-shell .quote-row-actions .btn{min-height:31px;padding:6px 9px;font-size:10px}
+.app-shell .invoice-row-actions .btn-primary{background:linear-gradient(135deg,#873052,#70163c);color:#fff}
+.app-shell .invoice-summary-grid .invoice-kpi-card{display:flex;align-items:center;gap:13px;min-width:0;min-height:112px;padding:16px;border:1px solid #eadde3;border-radius:14px;background:linear-gradient(145deg,#fff,#fcf7f9);box-shadow:0 7px 20px rgba(75,20,47,.045)}
+.app-shell .invoice-kpi-icon{display:grid;place-items:center;flex:0 0 42px;width:42px;height:42px;border-radius:13px;background:#f6e9ef;color:#70163c;font-size:17px;font-weight:900}
+.app-shell .invoice-kpi-card>div{min-width:0;display:flex;flex-direction:column;gap:3px}
+.app-shell .invoice-kpi-card small{color:#856b78;font-size:10px;font-weight:800}
+.app-shell .invoice-kpi-card strong{color:#542139;font-size:17px;line-height:1.35;overflow-wrap:anywhere}
+.app-shell .invoice-kpi-card em{color:#a18d96;font-size:9px;font-style:normal}
+.app-shell .invoice-kpi-card.is-paid .invoice-kpi-icon{background:#eaf6ef;color:#25845e}
+.app-shell .invoice-kpi-card.is-due .invoice-kpi-icon{background:#fff0ed;color:#b45a57}
+.app-shell .document-management-page .quote-no-results,.app-shell .document-management-page .invoice-no-results{margin:14px 0 0;padding:18px;border:1px dashed #dec4d0;border-radius:12px;background:#fdf8fa;color:#876d7a;text-align:center}
+.app-shell .document-management-page .quote-row[hidden],.app-shell .document-management-page .invoice-row[hidden]{display:none}
+@media(max-width:1000px){.app-shell .document-kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:650px){
+ .app-shell .document-kpi-grid{gap:8px;margin-bottom:12px}
+ .app-shell .document-management-page .quote-summary-card{min-height:96px;padding:12px}
+ .app-shell .document-management-page .quote-summary-card strong{font-size:17px}
+ .app-shell .invoice-summary-grid .invoice-kpi-card{min-height:94px;padding:11px;gap:9px}
+ .app-shell .invoice-kpi-icon{flex-basis:34px;width:34px;height:34px;border-radius:10px;font-size:13px}
+ .app-shell .invoice-kpi-card strong{font-size:13px}
+ .app-shell .document-list-panel>.panel-head{padding:13px}
+ .app-shell .document-list-panel .panel-body{padding:12px}
+ .app-shell .document-toolbar{align-items:stretch}
+ .app-shell .invoice-search-wrap{flex-basis:100%;min-width:100%}
+ .app-shell .document-toolbar select{flex:1;min-width:0;width:100%}
+ .app-shell .document-result-count{align-self:center}
+ .app-shell .document-list-table{min-width:780px}
+}
