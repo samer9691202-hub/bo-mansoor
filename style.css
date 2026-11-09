@@ -481,3 +481,25 @@ body[data-page="dashboard"] .app-shell .page-head .btn{background:#f3dce6;color:
  body.theme-dark .app-shell .settings-section-title>span{background:#382536;color:#f0b6cf}
  body.theme-dark .app-shell .notice{background:#302a35;border-color:#554252;color:#e8cbd8}
 }
+
+/* V22: system management, optional PIN and list presentation */
+.section-toggle-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:8px}
+.section-toggle{display:flex;align-items:center;gap:8px;padding:10px 12px;border:1px solid var(--line);border-radius:9px;background:#fbfcfd;font-size:11px;color:var(--ink);margin:0}
+.section-toggle input{width:16px;height:16px;accent-color:#74183e}
+.pin-lock-overlay{position:fixed;inset:0;z-index:99999;background:rgba(8,18,28,.94);display:none;align-items:center;justify-content:center;padding:20px}
+.pin-lock-card{width:min(360px,100%);padding:28px 22px;border-radius:18px;background:#fff;text-align:center;box-shadow:0 24px 80px #0005}
+.pin-lock-icon{font-size:34px;margin-bottom:8px}.pin-lock-card h2{margin:0 0 8px;color:#542139}.pin-lock-card p{margin:0 0 18px;color:#71808d;font-size:12px}.pin-lock-card .btn{width:100%;margin-top:12px}.pin-lock-card small{display:block;min-height:18px;color:#bd3d4b;margin-top:10px}
+body.list-cards #content .table-wrap{overflow:visible}
+body.list-cards #content table{width:100%;min-width:0;border-collapse:separate;border-spacing:0 9px}
+body.list-cards #content table thead{display:none}
+body.list-cards #content table tbody{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+body.list-cards #content table tbody tr{display:block;min-width:0;padding:8px 12px;border:1px solid var(--line);border-radius:12px;background:#fff;box-shadow:0 3px 12px rgba(24,44,61,.04)}
+body.list-cards #content table tbody td{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;white-space:normal;border:0;border-bottom:1px solid #edf1f5;padding:8px 2px;font-size:11px;text-align:left}
+body.list-cards #content table tbody td:last-child{border-bottom:0}
+body.list-cards #content table tbody td:before{content:attr(data-label);font-weight:800;color:#81909d;flex:0 0 38%;text-align:right}
+body.list-cards #content table tbody td .btn{max-width:100%;white-space:normal}
+body.theme-dark.list-cards #content table tbody tr{background:#1b2633;border-color:#344252}
+body.theme-dark.list-cards #content table tbody td{border-color:#344252}
+body.theme-dark .section-toggle{background:#202d3b;border-color:#3b4b5d;color:#e3ebf3}
+@media(max-width:700px){.section-toggle-grid{grid-template-columns:1fr}body.list-cards #content table tbody{grid-template-columns:1fr}}
+@media print{body.list-cards #content table{display:table!important}body.list-cards #content table thead{display:table-header-group!important}body.list-cards #content table tbody{display:table-row-group!important}body.list-cards #content table tbody tr{display:table-row!important;box-shadow:none!important;border:0!important}body.list-cards #content table tbody td{display:table-cell!important}body.list-cards #content table tbody td:before{content:none!important}}
