@@ -664,3 +664,88 @@ body[data-page="dashboard"] .content{padding:22px clamp(14px,2.2vw,30px) 34px;ba
 @media(max-width:1050px){.bm-main-grid{grid-template-columns:minmax(0,1.2fr) minmax(260px,.8fr)}.bm-shortcut-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.bm-welcome-art{margin-inline:5px}}
 @media(max-width:760px){body[data-page="dashboard"] .content{padding:13px 12px 25px}.bm-welcome{min-height:205px;padding:23px 19px;border-radius:18px}.bm-welcome-art{width:95px;height:110px;margin:0 0 0 4px}.bm-art-ring{width:82px;height:82px;border-radius:25px}.bm-art-icon{font-size:39px}.bm-welcome h1{font-size:21px}.bm-welcome p{font-size:11px;max-width:300px}.bm-welcome-date{left:18px;bottom:10px;font-size:9px}.bm-section-heading{margin:20px 2px 11px}.bm-section-heading h2{font-size:16px}.bm-section-heading>small{font-size:9px}.bm-metrics{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.bm-metric{min-height:120px;padding:13px;border-radius:14px;column-gap:8px}.bm-metric-icon{width:36px;height:36px}.bm-metric strong{font-size:25px}.bm-main-grid{grid-template-columns:1fr;gap:12px;margin-top:12px}.bm-main-column,.bm-side-column{gap:12px}.bm-panel{border-radius:15px}.bm-panel-head{padding:14px}.bm-shortcut-grid{padding:12px;gap:8px}.bm-shortcut-grid button{min-height:94px}.bm-welcome-actions{margin-top:14px}.bm-welcome-actions .btn{font-size:10px;padding:0 11px}}
 @media(max-width:390px){.bm-welcome-art{display:none}.bm-welcome h1{font-size:19px}.bm-section-heading>small{max-width:115px;text-align:left}.bm-shortcut-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.dash-project-status{display:none}}
+
+/* V31.1 — Remove decorative circular/ring lines from dashboard welcome card only. */
+.bm-art-ring,
+.bm-welcome:after{display:none!important}
+
+
+/* V34 — Visual language inspired by the supplied reference, adapted to Bo Mansoor burgundy identity.
+   Screen-only rules: invoice/quotation print and PDF templates remain untouched. */
+@media screen {
+:root{--bg:#f5f1ef;--panel:#fffdfc;--ink:#30232a;--muted:#8b7c83;--line:#eee3e6;--nav:#4b172e;--nav2:#61223d;--accent:#8b3657;--accent-dark:#68213f;--shadow:0 8px 26px rgba(75,23,46,.065)}
+body{background:linear-gradient(135deg,#f8f5f3 0%,#f1edf0 55%,#f5f0ed 100%);color:var(--ink)}
+.app-shell{gap:0}
+.sidebar{background:linear-gradient(180deg,#511a33 0%,#3d1428 100%);color:#f6eaf0;padding:24px 13px;box-shadow:8px 0 30px rgba(62,20,40,.10)}
+.brand{border-bottom:1px solid #ffffff20;padding:4px 9px 25px}
+.brand strong{color:#fff;font-size:19px}.brand small{color:#d6b9c5}
+.brand-mark{background:linear-gradient(145deg,#f4e8e9,#d9b8c5);color:#64223e;box-shadow:0 5px 16px #16071140;border-radius:14px}
+.side-label{color:#c49eae;margin-top:24px}
+.sidebar nav{gap:7px}
+.nav-item{color:#e0cbd4;border-radius:12px;padding:12px 13px;min-height:45px}
+.nav-item span{color:#d3aebd}
+.nav-item:hover{background:#ffffff12;color:#fff}
+.nav-item.active{background:linear-gradient(90deg,#ffffff24,#ffffff0c);color:#fff;border-right:3px solid #e6c5d1;box-shadow:inset 0 0 0 1px #ffffff0d}
+.nav-item.active span{color:#fff}
+.sidebar-bottom{border-color:#ffffff20;color:#d3b8c3}
+.topbar{height:78px;background:rgba(255,253,252,.88);border-bottom:1px solid #eadfe3;padding:0 30px;box-shadow:0 4px 20px rgba(75,23,46,.035)}
+.crumb{color:#a18e97}.crumb b{color:#d8c9ce}.crumb strong{color:#4a1a30}
+.offline-pill{background:#eef6f0;border-color:#dcebe0;color:#547c63}
+.btn{border-radius:11px}
+.btn-primary{background:linear-gradient(135deg,#8b3657,#68213f);border-color:#762747;color:#fff;box-shadow:0 5px 13px #68213f20}
+.btn-primary:hover{background:#68213f}
+.btn-light{background:#fffdfc;color:#672540;border-color:#eadde2}
+.btn-danger{background:#fff4f4;border-color:#f1d7dc}
+.content{padding:27px 30px 34px;max-width:1700px}
+.page-head{align-items:center;margin-bottom:22px}
+.page-head h1{color:#452035;font-size:25px}
+.panel,.stat-card,.bm-panel{background:rgba(255,253,252,.96);border:1px solid #eee2e6;border-radius:19px;box-shadow:0 8px 25px rgba(74,25,47,.055)}
+.panel-head,.bm-panel-head{border-color:#f0e7ea}
+.panel-head h3,.bm-panel-head h3{color:#492238}
+.stat-card{border-radius:17px;padding:19px}
+.stat-icon{background:#f5e8ed;color:#792b4a}
+.stat-card:nth-child(2) .stat-icon{background:#f3e9ed;color:#8b3657}
+.stat-card:nth-child(3) .stat-icon{background:#eaf4ee;color:#388461}
+.stat-card:nth-child(4) .stat-icon{background:#fbf0e6;color:#b87842}
+.quick-tile{border-radius:14px;background:#fffdfc;border-color:#eee3e7}
+.quick-tile span{color:#8b3657}
+input,select,textarea{border-radius:10px!important;border-color:#e9dfe3!important;background:#fffdfc}
+input:focus,select:focus,textarea:focus{outline:0;border-color:#a85d79!important;box-shadow:0 0 0 3px #8b365715}
+table{border-color:#eee3e7}
+thead th{background:#f8f2f4;color:#6d4054}
+tbody tr:hover{background:#fcf7f8}
+.badge{border-radius:20px}
+.bm-welcome{background:linear-gradient(115deg,#4b172e 0%,#71304d 62%,#92506a 100%);border:1px solid #7c3b56;box-shadow:0 12px 30px rgba(75,23,46,.16);color:#fff}
+.bm-welcome h1,.bm-welcome p,.bm-eyebrow{color:#fff}
+.bm-eyebrow{opacity:.86}
+.bm-welcome-actions .btn-welcome{background:#fff;color:#672540;border-color:#fff}
+.bm-welcome-actions .btn-welcome-ghost{background:#ffffff12;color:#fff;border-color:#ffffff55}
+.bm-welcome-date{color:#f0dce4}
+.bm-section-heading h2{color:#482036}
+.bm-metric{background:#fffdfc;border:1px solid #eee2e6;border-radius:17px;box-shadow:0 7px 22px rgba(74,25,47,.05)}
+.bm-metric-icon{background:#f5e8ed;color:#812e50}
+.bm-metric-icon.green{background:#eaf4ee;color:#388461}
+.bm-metric-icon.amber{background:#fbf0e6;color:#b87842}
+.bm-metric strong{color:#492238}
+.bm-panel{border-radius:18px}
+.bm-panel-kicker{color:#a06d83}
+.dash-project-mark{background:#f5e8ed;color:#792b4a;border-radius:12px}
+.bm-shortcut-grid button{background:#fffaf9;border-color:#eee3e7;border-radius:14px}
+.bm-shortcut-grid button:hover{background:#f8eff2;border-color:#d9b8c5}
+.bm-shortcut-grid button span{background:#f3e5eb;color:#792b4a}
+.bm-shortcut-grid b{color:#4d263a}
+.bm-panel-link{background:#fbf6f7;border-color:#f0e7ea;color:#782b4b}
+footer{color:#9b8b92}
+}
+@media screen and (max-width:900px){
+ .sidebar{width:230px}
+ .content{padding:20px 18px 28px}
+ .topbar{padding:0 18px}
+}
+@media screen and (max-width:680px){
+ .sidebar{box-shadow:5px 0 22px #35102022}
+ .topbar{height:66px;padding:0 12px}
+ .content{padding:15px 12px 25px}
+ .page-head h1{font-size:21px}
+ .panel,.stat-card,.bm-panel{border-radius:15px}
+}
