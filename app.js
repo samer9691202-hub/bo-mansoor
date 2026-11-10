@@ -52,13 +52,37 @@ function applyLocale(){const en=isEnglish(),dict=en?EN:AR,root=document.document
 
 function render(){document.body.dataset.page=currentPage;const el=document.getElementById('content');const map={dashboard:dashboardPage,customers:customersPage,projects:projectsPage,quotes:quotesPage,production:productionPage,inventory:inventoryPage,purchases:purchasesPage,installations:installationsPage,invoices:invoicesPage,expenses:expensesPage,reports:reportsPage,settings:settingsPage};el.innerHTML=(map[currentPage]||dashboardPage)();applyLocale()}
 function dashboardPage(){
- const open=db.production.filter(x=>!['مكتمل','ملغي'].includes(x.status)).length, unpaid=db.invoices.reduce((s,x)=>s+Math.max(0,(+x.total||0)-(+x.paid||0)),0), stockLow=db.inventory.filter(x=>(+x.qty||0)<=(+x.min||0)).length, revenue=db.invoices.reduce((s,x)=>s+(+x.paid||0),0), expenses=db.expenses.reduce((s,x)=>s+(+x.amount||0),0);
+ const open=db.production.filter(x=>!['مكتمل','ملغي'].includes(x.status)).length;
+ const stockLow=db.inventory.filter(x=>(+x.qty||0)<=(+x.min||0)).length;
  const recent=[...db.projects].slice(-5).reverse().map(p=>`<tr><td><span class="primary-cell">${esc(p.name)}</span><span class="sub-cell">${esc(p.code||p.id)}</span></td><td>${esc(customerName(p.customerId))}</td><td>${esc(p.type||'—')}</td><td>${badge(p.status||'جديد')}</td></tr>`).join('');
- return head('مرحبًا بك في ForgePro','نظرة عامة على أداء الورشة وحالة المشاريع اليوم',btn('＋ مشروع جديد',"openForm('project')"))+
- `<div class="stats-grid">${stat('أوامر التصنيع المفتوحة',open,'⚒','تحتاج إلى متابعة')}${stat('تنبيهات المخزون',stockLow,'▥','أصناف عند الحد الأدنى أو أقل')}</div>
- <div class="dashboard-grid"><div><div class="panel"><div class="panel-head"><div><h3>أحدث المشاريع</h3><p>آخر المشاريع المسجلة في النظام</p></div>${btn('عرض الكل',"setPage('projects')",'btn-light btn-small')}</div>${recent?table(['المشروع','العميل','نوع العمل','الحالة'],recent):empty('أضف أول مشروع لتبدأ إدارة أعمال الورشة')}</div>
- <div class="panel"><div class="panel-head"><div><h3>إجراءات سريعة</h3><p>ابدأ العمل دون التنقل بين الأقسام</p></div></div><div class="panel-body"><div class="quick-grid"><button class="quick-tile" onclick="openForm('customer')"><span>♙</span><b>إضافة عميل</b><small>تسجيل عميل جديد</small></button><button class="quick-tile" onclick="openForm('project')"><span>▤</span><b>مشروع جديد</b><small>تسجيل القياسات والتكلفة</small></button><button class="quick-tile" onclick="openForm('inventory')"><span>▥</span><b>إضافة مادة</b><small>تحديث المخزون</small></button><button class="quick-tile" onclick="openForm('quote')"><span>▧</span><b>عرض سعر</b><small>إنشاء تسعير للعميل</small></button><button class="quick-tile" onclick="openForm('production')"><span>⚒</span><b>أمر تصنيع</b><small>بدء متابعة الإنتاج</small></button><button class="quick-tile" onclick="openForm('invoice')"><span>▣</span><b>فاتورة جديدة</b><small>إنشاء فاتورة للعميل</small></button><button class="quick-tile" onclick="openRecoveryCard()"><span>🗝️</span><b>رمز الاستعادة</b><small>استعادة الوصول للتطبيق</small></button></div></div></div></div>
- <div><div class="panel"><div class="panel-head"><div><h3>حالة الإنتاج</h3><p>توزيع أوامر التصنيع الحالية</p></div></div><div class="panel-body">${productionBars()}</div></div><div class="notice">تذكير: خذ نسخة احتياطية دورية من صفحة الإعدادات، لأن بيانات هذا الإصدار محفوظة على المتصفح والجهاز الحالي.</div></div></div>`
+ const today=new Date().toLocaleDateString('ar-QA',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+ return head('مرحبًا بك في ورشة بو منصور','إدارة المشاريع وأعمال الورشة ومتابعة الإنتاج من مكان واحد',btn('＋ مشروع جديد',"openForm('project')"))+
+ `<div class="stats-grid dashboard-stats">
+ ${stat('العملاء',db.customers.length,'♙','إجمالي العملاء المسجلين')}
+ ${stat('المشاريع',db.projects.length,'▤','إجمالي المشاريع المسجلة')}
+ ${stat('أوامر التصنيع المفتوحة',open,'⚒','تحتاج إلى متابعة')}
+ ${stat('تنبيهات المخزون',stockLow,'▥','أصناف عند الحد الأدنى أو أقل')}
+ </div>
+ <div class="dashboard-date-line"><span class="dashboard-date-icon">▦</span><span>${today}</span><span class="dashboard-live-dot"></span><small>نظرة عامة على أعمال الورشة</small></div>
+ <div class="dashboard-grid"><div>
+ <div class="panel dashboard-projects-panel"><div class="panel-head"><div><h3>أحدث المشاريع</h3><p>آخر المشاريع المسجلة في النظام</p></div>${btn('عرض الكل',"setPage('projects')",'btn-light btn-small')}</div>${recent?table(['المشروع','العميل','نوع العمل','الحالة'],recent):empty('أضف أول مشروع لتبدأ إدارة أعمال الورشة')}</div>
+ <div class="panel dashboard-quick-panel"><div class="panel-head"><div><h3>إجراءات سريعة</h3><p>اختصارات للمهام الأكثر استخدامًا</p></div></div><div class="panel-body"><div class="quick-grid">
+ <button class="quick-tile" onclick="openForm('customer')"><span>♙</span><b>إضافة عميل</b><small>تسجيل عميل جديد</small></button>
+ <button class="quick-tile" onclick="openForm('project')"><span>▤</span><b>مشروع جديد</b><small>تسجيل مشروع وقياساته</small></button>
+ <button class="quick-tile" onclick="openForm('inventory')"><span>▥</span><b>إضافة مادة</b><small>تحديث المخزون</small></button>
+ <button class="quick-tile" onclick="openForm('quote')"><span>▧</span><b>عرض سعر</b><small>إنشاء عرض للعميل</small></button>
+ <button class="quick-tile" onclick="openForm('production')"><span>⚒</span><b>أمر تصنيع</b><small>بدء متابعة الإنتاج</small></button>
+ <button class="quick-tile" onclick="openForm('invoice')"><span>▣</span><b>فاتورة جديدة</b><small>إنشاء فاتورة للعميل</small></button>
+ </div></div></div>
+ </div><div>
+ <div class="panel dashboard-production-panel"><div class="panel-head"><div><h3>حالة الإنتاج</h3><p>توزيع أوامر التصنيع حسب المرحلة</p></div>${btn('إدارة الإنتاج',"setPage('production')",'btn-light btn-small')}</div><div class="panel-body">${productionBars()}</div></div>
+ <div class="panel dashboard-overview-panel"><div class="panel-head"><div><h3>متابعة الورشة</h3><p>مؤشرات تحتاج إلى الانتباه</p></div></div><div class="panel-body dashboard-alert-list">
+ <button class="dashboard-alert-item" onclick="setPage('production')"><span class="dashboard-alert-symbol production-symbol">⚒</span><span><b>أوامر التصنيع</b><small>متابعة الأعمال المفتوحة ومراحل التنفيذ</small></span><strong>${open}</strong></button>
+ <button class="dashboard-alert-item" onclick="setPage('inventory')"><span class="dashboard-alert-symbol stock-symbol">▥</span><span><b>المخزون والمواد</b><small>مراجعة الأصناف عند الحد الأدنى</small></span><strong>${stockLow}</strong></button>
+ <button class="dashboard-alert-item" onclick="setPage('installations')"><span class="dashboard-alert-symbol install-symbol">⌂</span><span><b>التركيب والتسليم</b><small>متابعة مواعيد وأعمال التسليم</small></span><strong>${db.installations.filter(x=>!['مكتمل','تم التسليم'].includes(x.status)).length}</strong></button>
+ </div></div>
+ <div class="notice">تذكير: خذ نسخة احتياطية دورية من صفحة الإعدادات، لأن بيانات هذا الإصدار محفوظة على المتصفح والجهاز الحالي.</div>
+ </div></div>`
 }
 function productionBars(){if(!db.production.length)return empty('لا توجد أوامر تصنيع');const statuses=['جديد','جاهز للتصنيع','قيد التصنيع','قيد التشطيب','تحت الفحص','جاهز للتركيب','مكتمل'];return statuses.map((s,i)=>{let n=db.production.filter(x=>x.status===s).length;return `<div class="bar-row"><div class="bar-meta"><span>${s}</span><span>${n}</span></div><div class="progress"><span style="width:${n/Math.max(1,db.production.length)*100}%;background:${['#d5a04c','#477bd4','#e5a23b','#9b79ce','#2c9c80','#4d8ed8','#169b72'][i]}"></span></div></div>`}).join('')}
 function customersPage(){let rows=db.customers.slice().reverse().map(c=>`<tr><td><span class="primary-cell">${esc(c.name)}</span><span class="sub-cell">${esc(c.code||'')}</span></td><td>${esc(c.phone||'—')}</td><td>${esc(c.type||'فرد')}</td><td>${esc(c.address||'—')}</td><td>${db.projects.filter(p=>p.customerId===c.id).length}</td><td>${btn('تعديل',`editItem('customer','${c.id}')`,'btn-light btn-small')} ${btn('حذف',`deleteItem('customers','${c.id}')`,'btn-danger btn-small')}</td></tr>`).join('');return head('العملاء','إدارة بيانات العملاء والمقاولين وسجل مشاريعهم',btn('＋ إضافة عميل',"openForm('customer')"))+`<div class="panel"><div class="panel-body"><div class="search-row"><input class="field search-input" placeholder="ابحث بالاسم أو الهاتف..." oninput="filterRows(this,0)"><span class="badge">${db.customers.length} عميل</span></div><div id="customerTable">${rows?table(['العميل','الهاتف','نوع العميل','العنوان','المشاريع','الإجراءات'],rows):empty('لا يوجد عملاء. أضف أول عميل.')}</div></div></div>`}
