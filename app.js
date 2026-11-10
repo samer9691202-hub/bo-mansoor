@@ -143,10 +143,14 @@ function settingsPage(){const lowStock=db.inventory.filter(x=>Number(x.min)>0&&N
 function scrollToSettingsSection(id){
  const target=document.getElementById(id);
  if(!target)return;
- const topbar=document.querySelector('.topbar');
+ // The application scrolls inside .main, not on window/body.
+ const scroller=target.closest('.app-shell > .main')||target.closest('.main')||document.scrollingElement||document.documentElement;
+ const topbar=scroller.querySelector?.('.topbar')||document.querySelector('.topbar');
  const offset=(topbar?.getBoundingClientRect().height||0)+14;
- const top=target.getBoundingClientRect().top+(window.pageYOffset||document.documentElement.scrollTop||0)-offset;
- try{window.scrollTo({top:Math.max(0,top),behavior:'smooth'});}catch(e){window.scrollTo(0,Math.max(0,top));}
+ const containerTop=scroller===document.scrollingElement||scroller===document.documentElement||scroller===document.body?0:scroller.getBoundingClientRect().top;
+ const currentScroll=scroller===document.scrollingElement||scroller===document.documentElement||scroller===document.body?(window.pageYOffset||document.documentElement.scrollTop||0):scroller.scrollTop;
+ const top=Math.max(0,target.getBoundingClientRect().top-containerTop+currentScroll-offset);
+ try{scroller.scrollTo({top,behavior:'smooth'});}catch(e){scroller.scrollTop=top;}
  target.setAttribute('tabindex','-1');
  window.setTimeout(()=>{try{target.focus({preventScroll:true});}catch(e){}},350);
  document.querySelectorAll('.settings-nav button').forEach(b=>b.classList.toggle('is-current',b.getAttribute('onclick')?.includes(id)));
