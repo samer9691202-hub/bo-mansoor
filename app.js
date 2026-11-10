@@ -12,7 +12,10 @@ function nextQuoteCode(){return 'QT-'+String(Math.max(0,...db.quotes.map(x=>Numb
 function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),2600)}
 function pageTitle(p){return ({dashboard:'لوحة التحكم',customers:'العملاء',projects:'المشاريع والقياسات',quotes:'عروض الأسعار',production:'أوامر التصنيع',inventory:'المخزون والمواد',purchases:'المشتريات والموردون',installations:'التركيب والتسليم',invoices:'الفواتير والدفعات',expenses:'المصروفات',reports:'التقارير',settings:'الإعدادات والنسخ الاحتياطي'})[p]||'ForgePro'}
-function setPage(p){currentPage=p;document.querySelectorAll('.nav-item').forEach(b=>b.classList.toggle('active',b.dataset.page===p));document.getElementById('pageTitle').textContent=pageTitle(p);document.getElementById('sidebar').classList.remove('open');document.getElementById('mobileMenu')?.setAttribute('aria-expanded','false');render()}
+function paintPage(p){currentPage=p;document.querySelectorAll('.nav-item').forEach(b=>b.classList.toggle('active',b.dataset.page===p));document.getElementById('pageTitle').textContent=pageTitle(p);document.getElementById('sidebar').classList.remove('open');document.getElementById('mobileMenu')?.setAttribute('aria-expanded','false');const back=document.getElementById('pageBack');if(back){back.disabled=p==='dashboard';back.classList.toggle('is-disabled',p==='dashboard');}render()}
+function setPage(p){if(!p||p===currentPage)return;try{history.pushState({bmPage:p},'',location.pathname+location.search+'#'+encodeURIComponent(p));}catch(e){}paintPage(p)}
+function goBackPage(){if(currentPage==='dashboard')return;if(history.state&&history.state.bmPage){history.back();return;}paintPage('dashboard');}
+window.addEventListener('popstate',e=>{const p=e.state&&e.state.bmPage;if(p&&pageTitle(p)!=='ForgePro')paintPage(p);else paintPage('dashboard');});
 function head(title,desc,actions=''){return `<div class="page-head"><div><h1>${title}</h1><p>${desc}</p></div><div class="head-actions">${actions}</div></div>`}
 function btn(label,act,kind='btn-primary'){return `<button class="btn ${kind}" onclick="${act}">${label}</button>`}
 function stat(label,value,icon,foot=''){return `<div class="stat-card"><div class="stat-top"><span>${label}</span><div class="stat-icon">${icon}</div></div><div class="stat-value">${value}</div><div class="stat-foot">${foot}</div></div>`}
@@ -373,6 +376,8 @@ document.getElementById('quickAdd').addEventListener('click',()=>{const map={das
 document.getElementById('modalBackdrop').addEventListener('click',e=>{if(e.target.id==='modalBackdrop')closeModal()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 applyAppearance();
-render();
+try{history.replaceState({bmPage:'dashboard'},'',location.pathname+location.search+'#dashboard');}catch(e){}
+paintPage('dashboard');
+document.getElementById('pageBack')?.addEventListener('click',goBackPage);
 initSecurity();
 setTimeout(checkBackupReminder,1200);

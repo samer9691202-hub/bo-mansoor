@@ -875,3 +875,9 @@ footer{color:#9b8b92}
  .document-list-table{min-width:560px}
 }
 @media screen and (max-width:360px){.stats-grid,.document-kpi-grid,.invoice-summary-grid{grid-template-columns:1fr}.head-actions .btn{font-size:10px;padding-inline:8px}}
+
+/* Page navigation back control */
+.page-back{display:grid;place-items:center;flex:0 0 39px;width:39px;height:39px;border:1px solid #e7d8df;border-radius:11px;background:#fff;color:#74183e;font:700 27px/1 Tahoma,Arial,sans-serif;cursor:pointer;transition:background .18s,transform .18s,border-color .18s}
+.page-back:not(:disabled):hover{background:#f8edf1;border-color:#c99aaa;transform:translateX(2px)}
+.page-back:disabled,.page-back.is-disabled{opacity:.35;cursor:default}
+.page-back:focus-visible{outline:3px solid #74183e33;outline-offset:2px}
