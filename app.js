@@ -54,35 +54,29 @@ function render(){document.body.dataset.page=currentPage;const el=document.getEl
 function dashboardPage(){
  const open=db.production.filter(x=>!['مكتمل','ملغي'].includes(x.status)).length;
  const stockLow=db.inventory.filter(x=>(+x.qty||0)<=(+x.min||0)).length;
- const recent=[...db.projects].slice(-5).reverse().map(p=>`<tr><td><span class="primary-cell">${esc(p.name)}</span><span class="sub-cell">${esc(p.code||p.id)}</span></td><td>${esc(customerName(p.customerId))}</td><td>${esc(p.type||'—')}</td><td>${badge(p.status||'جديد')}</td></tr>`).join('');
+ const waiting=db.projects.filter(x=>!['مكتمل','ملغي','تم التسليم'].includes(x.status)).length;
+ const installOpen=db.installations.filter(x=>!['مكتمل','تم التسليم'].includes(x.status)).length;
+ const recent=[...db.projects].slice(-4).reverse();
  const today=new Date().toLocaleDateString('ar-QA',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
- return head('مرحبًا بك في ورشة بو منصور','إدارة المشاريع وأعمال الورشة ومتابعة الإنتاج من مكان واحد',btn('＋ مشروع جديد',"openForm('project')"))+
- `<div class="stats-grid dashboard-stats">
- ${stat('العملاء',db.customers.length,'♙','إجمالي العملاء المسجلين')}
- ${stat('المشاريع',db.projects.length,'▤','إجمالي المشاريع المسجلة')}
- ${stat('أوامر التصنيع المفتوحة',open,'⚒','تحتاج إلى متابعة')}
- ${stat('تنبيهات المخزون',stockLow,'▥','أصناف عند الحد الأدنى أو أقل')}
+ const projectCards=recent.map(p=>`<button class="dash-project-card" onclick="setPage('projects')"><span class="dash-project-mark">▤</span><span class="dash-project-info"><b>${esc(p.name)}</b><small>${esc(customerName(p.customerId))} · ${esc(p.type||'أعمال ورشة')}</small></span><span class="dash-project-status">${badge(p.status||'جديد')}</span><i>‹</i></button>`).join('');
+ return `<section class="bm-dashboard">
+ <div class="bm-welcome"><div class="bm-welcome-copy"><span class="bm-eyebrow"><i></i> مركز إدارة الورشة</span><h1>أهلاً بك في ورشة بو منصور</h1><p>كل أعمال الورشة ومشاريعك في لوحة واحدة، بمتابعة أوضح وخطوات أسرع.</p><div class="bm-welcome-actions">${btn('＋ إنشاء مشروع جديد',"openForm('project')",'btn-welcome')}${btn('عرض المشاريع',"setPage('projects')",'btn-welcome-ghost')}</div></div><div class="bm-welcome-art"><div class="bm-art-ring"></div><div class="bm-art-icon">⚒</div><span>إتقان · جودة · إنجاز</span></div><div class="bm-welcome-date">${today}</div></div>
+ <div class="bm-section-heading"><div><span>نظرة عامة</span><h2>ملخص الورشة</h2></div><small>مؤشرات محدثة من بيانات النظام</small></div>
+ <div class="bm-metrics">
+ <button class="bm-metric" onclick="setPage('customers')"><span class="bm-metric-icon">♙</span><span class="bm-metric-label">العملاء</span><strong>${db.customers.length}</strong><small>عميل مسجل</small><i>↗</i></button>
+ <button class="bm-metric" onclick="setPage('projects')"><span class="bm-metric-icon">▤</span><span class="bm-metric-label">المشاريع</span><strong>${db.projects.length}</strong><small>${waiting} مشروع قيد المتابعة</small><i>↗</i></button>
+ <button class="bm-metric" onclick="setPage('production')"><span class="bm-metric-icon green">⚒</span><span class="bm-metric-label">التصنيع</span><strong>${open}</strong><small>أمر تصنيع مفتوح</small><i>↗</i></button>
+ <button class="bm-metric" onclick="setPage('inventory')"><span class="bm-metric-icon amber">▥</span><span class="bm-metric-label">المخزون</span><strong>${stockLow}</strong><small>تنبيه يحتاج مراجعة</small><i>↗</i></button>
  </div>
- <div class="dashboard-date-line"><span class="dashboard-date-icon">▦</span><span>${today}</span><span class="dashboard-live-dot"></span><small>نظرة عامة على أعمال الورشة</small></div>
- <div class="dashboard-grid"><div>
- <div class="panel dashboard-projects-panel"><div class="panel-head"><div><h3>أحدث المشاريع</h3><p>آخر المشاريع المسجلة في النظام</p></div>${btn('عرض الكل',"setPage('projects')",'btn-light btn-small')}</div>${recent?table(['المشروع','العميل','نوع العمل','الحالة'],recent):empty('أضف أول مشروع لتبدأ إدارة أعمال الورشة')}</div>
- <div class="panel dashboard-quick-panel"><div class="panel-head"><div><h3>إجراءات سريعة</h3><p>اختصارات للمهام الأكثر استخدامًا</p></div></div><div class="panel-body"><div class="quick-grid">
- <button class="quick-tile" onclick="openForm('customer')"><span>♙</span><b>إضافة عميل</b><small>تسجيل عميل جديد</small></button>
- <button class="quick-tile" onclick="openForm('project')"><span>▤</span><b>مشروع جديد</b><small>تسجيل مشروع وقياساته</small></button>
- <button class="quick-tile" onclick="openForm('inventory')"><span>▥</span><b>إضافة مادة</b><small>تحديث المخزون</small></button>
- <button class="quick-tile" onclick="openForm('quote')"><span>▧</span><b>عرض سعر</b><small>إنشاء عرض للعميل</small></button>
- <button class="quick-tile" onclick="openForm('production')"><span>⚒</span><b>أمر تصنيع</b><small>بدء متابعة الإنتاج</small></button>
- <button class="quick-tile" onclick="openForm('invoice')"><span>▣</span><b>فاتورة جديدة</b><small>إنشاء فاتورة للعميل</small></button>
- </div></div></div>
- </div><div>
- <div class="panel dashboard-production-panel"><div class="panel-head"><div><h3>حالة الإنتاج</h3><p>توزيع أوامر التصنيع حسب المرحلة</p></div>${btn('إدارة الإنتاج',"setPage('production')",'btn-light btn-small')}</div><div class="panel-body">${productionBars()}</div></div>
- <div class="panel dashboard-overview-panel"><div class="panel-head"><div><h3>متابعة الورشة</h3><p>مؤشرات تحتاج إلى الانتباه</p></div></div><div class="panel-body dashboard-alert-list">
- <button class="dashboard-alert-item" onclick="setPage('production')"><span class="dashboard-alert-symbol production-symbol">⚒</span><span><b>أوامر التصنيع</b><small>متابعة الأعمال المفتوحة ومراحل التنفيذ</small></span><strong>${open}</strong></button>
- <button class="dashboard-alert-item" onclick="setPage('inventory')"><span class="dashboard-alert-symbol stock-symbol">▥</span><span><b>المخزون والمواد</b><small>مراجعة الأصناف عند الحد الأدنى</small></span><strong>${stockLow}</strong></button>
- <button class="dashboard-alert-item" onclick="setPage('installations')"><span class="dashboard-alert-symbol install-symbol">⌂</span><span><b>التركيب والتسليم</b><small>متابعة مواعيد وأعمال التسليم</small></span><strong>${db.installations.filter(x=>!['مكتمل','تم التسليم'].includes(x.status)).length}</strong></button>
- </div></div>
- <div class="notice">تذكير: خذ نسخة احتياطية دورية من صفحة الإعدادات، لأن بيانات هذا الإصدار محفوظة على المتصفح والجهاز الحالي.</div>
- </div></div>`
+ <div class="bm-main-grid"><div class="bm-main-column">
+ <section class="bm-panel bm-recent"><div class="bm-panel-head"><div><span class="bm-panel-kicker">آخر التحديثات</span><h3>أحدث المشاريع</h3><p>تابع آخر الأعمال التي تمت إضافتها للورشة.</p></div>${btn('كل المشاريع ←',"setPage('projects')",'btn-light btn-small')}</div><div class="bm-project-list">${projectCards||empty('لا توجد مشاريع حتى الآن. أضف مشروعك الأول للبدء.')}</div></section>
+ <section class="bm-panel bm-shortcuts"><div class="bm-panel-head"><div><span class="bm-panel-kicker">ابدأ بسرعة</span><h3>اختصارات العمل</h3><p>الوصول المباشر للمهام اليومية.</p></div></div><div class="bm-shortcut-grid">
+ <button onclick="openForm('customer')"><span>♙</span><b>إضافة عميل</b><small>بيانات عميل جديد</small></button><button onclick="openForm('project')"><span>▤</span><b>مشروع جديد</b><small>تسجيل عمل وقياسات</small></button><button onclick="openForm('quote')"><span>▧</span><b>عرض سعر</b><small>تجهيز عرض للعميل</small></button><button onclick="openForm('production')"><span>⚒</span><b>أمر تصنيع</b><small>بدء متابعة الإنتاج</small></button><button onclick="openForm('inventory')"><span>▥</span><b>إضافة مادة</b><small>تحديث المخزون</small></button><button onclick="openForm('invoice')"><span>▣</span><b>فاتورة جديدة</b><small>إنشاء فاتورة</small></button>
+ </div></section></div><aside class="bm-side-column">
+ <section class="bm-panel bm-workflow"><div class="bm-panel-head"><div><span class="bm-panel-kicker">سير العمل</span><h3>حالة التصنيع</h3><p>توزيع أوامر التصنيع الحالية.</p></div></div><div class="bm-workflow-body">${productionBars()}</div><button class="bm-panel-link" onclick="setPage('production')">الانتقال إلى أوامر التصنيع <b>←</b></button></section>
+ <section class="bm-panel bm-attention"><div class="bm-panel-head"><div><span class="bm-panel-kicker">قائمة المتابعة</span><h3>ما يحتاج انتباهك</h3></div><span class="bm-attention-count">${open+stockLow+installOpen}</span></div><button onclick="setPage('production')"><span class="bm-attention-icon purple">⚒</span><span><b>أوامر التصنيع</b><small>أعمال لم تكتمل بعد</small></span><strong>${open}</strong></button><button onclick="setPage('inventory')"><span class="bm-attention-icon amber">▥</span><span><b>المخزون</b><small>أصناف عند حد التنبيه</small></span><strong>${stockLow}</strong></button><button onclick="setPage('installations')"><span class="bm-attention-icon green">⌂</span><span><b>التركيب والتسليم</b><small>عمليات قيد المتابعة</small></span><strong>${installOpen}</strong></button></section>
+ <div class="bm-backup-hint"><span>✓</span><div><b>حافظ على بياناتك</b><small>أنشئ نسخة احتياطية دورية من صفحة الإعدادات.</small></div><button onclick="setPage('settings')">الإعدادات ←</button></div>
+ </aside></div></section>`;
 }
 function productionBars(){if(!db.production.length)return empty('لا توجد أوامر تصنيع');const statuses=['جديد','جاهز للتصنيع','قيد التصنيع','قيد التشطيب','تحت الفحص','جاهز للتركيب','مكتمل'];return statuses.map((s,i)=>{let n=db.production.filter(x=>x.status===s).length;return `<div class="bar-row"><div class="bar-meta"><span>${s}</span><span>${n}</span></div><div class="progress"><span style="width:${n/Math.max(1,db.production.length)*100}%;background:${['#d5a04c','#477bd4','#e5a23b','#9b79ce','#2c9c80','#4d8ed8','#169b72'][i]}"></span></div></div>`}).join('')}
 function customersPage(){let rows=db.customers.slice().reverse().map(c=>`<tr><td><span class="primary-cell">${esc(c.name)}</span><span class="sub-cell">${esc(c.code||'')}</span></td><td>${esc(c.phone||'—')}</td><td>${esc(c.type||'فرد')}</td><td>${esc(c.address||'—')}</td><td>${db.projects.filter(p=>p.customerId===c.id).length}</td><td>${btn('تعديل',`editItem('customer','${c.id}')`,'btn-light btn-small')} ${btn('حذف',`deleteItem('customers','${c.id}')`,'btn-danger btn-small')}</td></tr>`).join('');return head('العملاء','إدارة بيانات العملاء والمقاولين وسجل مشاريعهم',btn('＋ إضافة عميل',"openForm('customer')"))+`<div class="panel"><div class="panel-body"><div class="search-row"><input class="field search-input" placeholder="ابحث بالاسم أو الهاتف..." oninput="filterRows(this,0)"><span class="badge">${db.customers.length} عميل</span></div><div id="customerTable">${rows?table(['العميل','الهاتف','نوع العميل','العنوان','المشاريع','الإجراءات'],rows):empty('لا يوجد عملاء. أضف أول عميل.')}</div></div></div>`}
