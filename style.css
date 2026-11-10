@@ -913,3 +913,10 @@ body.theme-dark .app-shell .settings-overview-main p,body.theme-dark .app-shell 
 body.theme-dark .app-shell .settings-nav{background:rgba(27,38,51,.96);border-color:#3b4654}
 body.theme-dark .app-shell .settings-nav a{background:#202d3b;border-color:#3b4654;color:#eadce4}
 body.theme-dark .app-shell .settings-nav a:hover,body.theme-dark .app-shell .settings-nav a:focus{background:#382536;border-color:#8b4866;color:#ffdce9}
+/* Settings section quick navigation: use real buttons and explicit page scrolling. */
+.app-shell .settings-nav button{appearance:none;-webkit-appearance:none;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:9px 12px;border:1px solid #eee3e8;border-radius:10px;background:#fff;color:#684357;font:inherit;font-size:11px;font-weight:700;cursor:pointer;transition:.18s;white-space:nowrap}
+.app-shell .settings-nav button:hover,.app-shell .settings-nav button:focus-visible,.app-shell .settings-nav button.is-current{outline:none;border-color:#b97893;background:#f8edf2;color:#70163c}
+.app-shell .settings-anchor,.app-shell .settings-anchor-card{scroll-margin-top:90px}
+@media(max-width:650px){.app-shell .settings-nav button{flex:1 1 calc(50% - 6px);min-height:42px;padding:10px 7px;font-size:10px;white-space:normal}.app-shell .settings-anchor,.app-shell .settings-anchor-card{scroll-margin-top:78px}}
+body.theme-dark .app-shell .settings-nav button{background:#202d3b;border-color:#3b4654;color:#eadce4}
+body.theme-dark .app-shell .settings-nav button:hover,body.theme-dark .app-shell .settings-nav button:focus-visible,body.theme-dark .app-shell .settings-nav button.is-current{background:#382536;border-color:#8b4866;color:#ffdce9}
