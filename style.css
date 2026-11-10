@@ -881,3 +881,35 @@ footer{color:#9b8b92}
 .page-back:not(:disabled):hover{background:#f8edf1;border-color:#c99aaa;transform:translateX(2px)}
 .page-back:disabled,.page-back.is-disabled{opacity:.35;cursor:default}
 .page-back:focus-visible{outline:3px solid #74183e33;outline-offset:2px}
+
+/* V39: keep back and sidebar controls adjacent */
+.topbar .nav-controls{display:flex;align-items:center;gap:7px;flex:0 0 auto;}
+.topbar .nav-controls .page-back,.topbar .nav-controls .mobile-menu{flex:0 0 auto;margin:0;}
+@media(max-width:760px){.topbar .nav-controls{gap:5px;} .topbar .crumb{margin-left:auto;}}
+
+
+/* V40: تنظيم مركز الإعدادات مع الحفاظ على جميع الوظائف الحالية */
+.app-shell .settings-overview{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:19px 21px;margin:0 0 15px;border:1px solid #eadce3;border-radius:17px;background:linear-gradient(120deg,#fff 0%,#fbf4f7 100%);box-shadow:0 8px 24px rgba(80,25,49,.055)}
+.app-shell .settings-overview-main{display:flex;align-items:center;gap:14px;min-width:0}
+.app-shell .settings-overview-icon{display:grid;place-items:center;width:48px;height:48px;flex:0 0 48px;border-radius:15px;background:#70163c;color:#fff;font-size:22px;box-shadow:0 5px 13px #70163c28}
+.app-shell .settings-overview-main strong{display:block;color:#542139;font-size:15px;font-weight:800}
+.app-shell .settings-overview-main p{margin:5px 0 0;color:#927b86;font-size:11px;line-height:1.7}
+.app-shell .settings-overview-status{display:flex;align-items:flex-end;flex-direction:column;gap:7px;color:#76596a;font-size:10px;white-space:nowrap}
+.app-shell .settings-overview-status>span{display:flex;align-items:center;gap:6px}
+.app-shell .settings-status-dot{width:7px;height:7px;border-radius:50%;background:#c58a35;display:inline-block}
+.app-shell .settings-nav{position:sticky;top:8px;z-index:8;display:flex;gap:8px;flex-wrap:wrap;padding:10px;margin:0 0 22px;border:1px solid #eadde3;border-radius:14px;background:rgba(255,255,255,.94);box-shadow:0 5px 18px rgba(60,25,42,.045);backdrop-filter:blur(10px)}
+.app-shell .settings-nav a{display:inline-flex;align-items:center;gap:6px;padding:9px 12px;border:1px solid #eee3e8;border-radius:10px;background:#fff;color:#684357;text-decoration:none;font-size:11px;font-weight:700;transition:.18s}
+.app-shell .settings-nav a:hover,.app-shell .settings-nav a:focus{border-color:#b97893;background:#f8edf2;color:#70163c;transform:translateY(-1px)}
+.app-shell .settings-anchor{scroll-margin-top:90px}
+.app-shell .settings-anchor-card{scroll-margin-top:90px}
+.app-shell .settings-section-title{padding-bottom:3px}
+.app-shell .settings-card{border-radius:15px;padding:20px;margin-bottom:17px}
+.app-shell .settings-card .form-actions{margin-top:19px}
+.app-shell .settings-card .settings-hint{line-height:1.8}
+@media(max-width:650px){.app-shell .settings-overview{align-items:flex-start;flex-direction:column;padding:15px}.app-shell .settings-overview-status{align-items:flex-start;flex-direction:row;flex-wrap:wrap}.app-shell .settings-nav{position:static;gap:6px;padding:8px}.app-shell .settings-nav a{flex:1 1 calc(50% - 6px);justify-content:center;padding:10px 7px;font-size:10px}.app-shell .settings-card{padding:15px}.app-shell .settings-anchor{scroll-margin-top:14px}}
+body.theme-dark .app-shell .settings-overview{background:linear-gradient(120deg,#1b2633,#282333);border-color:#3b4654}
+body.theme-dark .app-shell .settings-overview-main strong{color:#f1dce6}
+body.theme-dark .app-shell .settings-overview-main p,body.theme-dark .app-shell .settings-overview-status{color:#b9a8b2}
+body.theme-dark .app-shell .settings-nav{background:rgba(27,38,51,.96);border-color:#3b4654}
+body.theme-dark .app-shell .settings-nav a{background:#202d3b;border-color:#3b4654;color:#eadce4}
+body.theme-dark .app-shell .settings-nav a:hover,body.theme-dark .app-shell .settings-nav a:focus{background:#382536;border-color:#8b4866;color:#ffdce9}
